@@ -55,7 +55,7 @@ form.addEventListener('submit', (e) => {
     console.log('list of players and stats', stats);
 
     renderStats();
-    form.reset();
+    // form.reset();
 });
 
 remove.addEventListener('click', () => {
@@ -77,13 +77,17 @@ save.addEventListener('click', () => {
     // reset the stats with resetStats
 
     // console.log('saving game');
-    const savedGames = new FormData(form);
-
+    let totalPoints = 0;
+    for (let stat of stats) {
+        let gamePoint = Number(stat.points);
+        totalPoints += gamePoint;
+    }
     let game = {
-        number: savedGames.get('games.length + 1'),
-        totalPoints: savedGames.get('totalPoints')
+        number: games.length + 1,
+        totalPoints
     };
-
+    
+    console.log(game);
     games.push(game);
     renderGames();
     resetStats();
